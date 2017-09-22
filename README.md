@@ -77,6 +77,12 @@ $( '#some-element' ).insertAfter( '#another-element' );
 $( '#some-element' ).remove();
 ```
 
+- Find closest ancestor
+
+```javascript
+var element = $( '#some-element' ).closest( '.another-class' );
+```
+
 - Add a class
 
 ```javascript
