@@ -24,7 +24,7 @@ If you start using NINJA and then later discover that for some reason you need s
 
 ## What NINJA is **not**
 
-So NINJA uses jQuery's syntax, but it provides only a very small subset of jQuery's functionality. It is not intended as a like-for-like replacement for jQuery (if you're looking 'jQuery-but-smaller', try [Zepto](https://github.com/madrobby/zepto)) and it will never become that.
+So NINJA uses jQuery's syntax, but it provides only a very small subset of jQuery's functionality. It is not intended as a like-for-like replacement for jQuery, and it will never become that. If you're looking 'jQuery-but-smaller', try [Zepto](https://github.com/madrobby/zepto).
 
 ## Supported syntax and methods
 
@@ -131,6 +131,6 @@ var func = $.proxy( function(){...}, this );
 if( $.isArray( myArray ) ){...}
 ```
 
-## Acknoweldgements
+## Acknowledgements
 
 This library owes a massive debt to [You Might Not Need jQuery](http://youmightnotneedjquery.com/), so hats off to them. Also, inevitably, to an uncountable number of contributors to various threads on [StackOverflow](https://stackoverflow.com). You're all amazing.
