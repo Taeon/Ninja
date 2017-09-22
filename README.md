@@ -4,7 +4,7 @@
 
 ## What NINJA is
 
-Ninja is intended to be a very small (as in, small file size) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
+Ninja is intended to be a very small (as in, small file size -- <3.5KB minified, <1.3KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
 
 I created it because I wanted to create JavScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
@@ -92,13 +92,25 @@ $( '#some-element' ).insertAfter( '#another-element' );
 - Remove
 
 ```javascript
-$( '#some-element' )remove();
+$( '#some-element' ).remove();
 ```
 
 - Each
 
 ```javascript
 $( '#some-element' ).each( function(){...} );
+```
+
+- Add event listener
+
+```javascript
+$( '#some-element' ).on( 'click', function(){...} );
+```
+
+- Remove event listener
+
+```javascript
+$( '#some-element' ).off( 'click', function(){...} );
 ```
 
 - Proxy
