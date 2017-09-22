@@ -38,9 +38,11 @@ I've also heard it said that there are differences between browser implementatio
 
 At the moment, NINJA supports the following functions:
 
-- Call a function on docmument ready
+- Call a function on document ready
 
+```javascript
 $( function(){ alert( 'Hello world!' ); } );
+```
 
 - Create a DOM element:
 
@@ -52,4 +54,61 @@ var element = $( '<div>Hello World!</div>' );
 
 ```javascript
 $( '.some-class' ).addClass( 'another-class' );
+```
+
+- Remove a class
+
+```javascript
+$( '.some-class' ).removeClass( 'another-class' );
+```
+
+- Has a class?
+
+```javascript
+if( $( '.some-class' ).hasClass( 'another-class' ) ){...}
+```
+
+- Append
+
+```javascript
+$( '#some-element' ).append( '#another-element' );
+```
+- Prepend
+
+```javascript
+$( '#some-element' ).prepend( '#another-element' );
+```
+- Insert before
+
+```javascript
+$( '#some-element' ).insertBefore( '#another-element' );
+```
+- Insert after
+
+```javascript
+$( '#some-element' ).insertAfter( '#another-element' );
+```
+
+- Remove
+
+```javascript
+$( '#some-element' )remove();
+```
+
+- Each
+
+```javascript
+$( '#some-element' ).each( function(){...} );
+```
+
+- Proxy
+
+```javascript
+var func = $.proxy( function(){...}, this );
+```
+
+- Is array
+
+```javascript
+if( $.isArray( myArray ) ){...}
 ```
