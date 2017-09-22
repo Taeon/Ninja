@@ -124,3 +124,7 @@ var func = $.proxy( function(){...}, this );
 ```javascript
 if( $.isArray( myArray ) ){...}
 ```
+
+## Acknoweldgements
+
+This library owes a massive debt to [You Might Not Need jQuery](http://youmightnotneedjquery.com/), so hats off to them. Also, inevitably, to an uncountable number of contributors to various threads on [StackOverflow](https://stackoverflow.com). You're all amazing.
