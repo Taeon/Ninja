@@ -6,7 +6,7 @@
 
 Ninja is intended to be a very small (as in, small file size -- <3.5KB minified, <1.3KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
 
-I created it because I wanted to create JavScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
+I created it because I wanted to create JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
 ```javascript
 $( '.button' ).on( 'click', function(){...} );
@@ -50,24 +50,6 @@ $( function(){ alert( 'Hello world!' ); } );
 var element = $( '<div>Hello World!</div>' );
 ```
 
-- Add a class
-
-```javascript
-$( '.some-class' ).addClass( 'another-class' );
-```
-
-- Remove a class
-
-```javascript
-$( '.some-class' ).removeClass( 'another-class' );
-```
-
-- Has a class?
-
-```javascript
-if( $( '.some-class' ).hasClass( 'another-class' ) ){...}
-```
-
 - Append
 
 ```javascript
@@ -93,6 +75,24 @@ $( '#some-element' ).insertAfter( '#another-element' );
 
 ```javascript
 $( '#some-element' ).remove();
+```
+
+- Add a class
+
+```javascript
+$( '.some-class' ).addClass( 'another-class' );
+```
+
+- Remove a class
+
+```javascript
+$( '.some-class' ).removeClass( 'another-class' );
+```
+
+- Has a class?
+
+```javascript
+if( $( '.some-class' ).hasClass( 'another-class' ) ){...}
 ```
 
 - Each
