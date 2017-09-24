@@ -113,9 +113,13 @@ if( typeof $ == 'undefined' ){
             var o = false;
             for( var i = 0; i < this.length; i++ ){
                 if (this[ i ].classList){
-                    if( this[ i ].classList.contains(className) ){return true};
+                    if( this[ i ].classList.contains(className) ){
+                        return true
+                    };
                 } else {
-                    if( new RegExp('(^| )' + className + '( |$)', 'gi').test(this.className) ){return true};
+                    if( new RegExp('(^| )' + className + '( |$)', 'gi').test( this[ i ].className ) ){
+                        return true
+                    };
                 }
             }
             return false;
@@ -126,7 +130,7 @@ if( typeof $ == 'undefined' ){
          */
         var IB = function( selector ){
             var nodelist = $( selector );
-            for( var i = 0; i < selector.length; i++ ){
+            for( var i = 0; i < nodelist.length; i++ ){
                 var element = nodelist[ i ];
                 $( this ).each(
                     function() {
@@ -142,7 +146,7 @@ if( typeof $ == 'undefined' ){
         var IA = function( selector ){
 
             var nodelist = $( selector );
-            for( var i = 0; i < selector.length; i++ ){
+            for( var i = 0; i < nodelist.length; i++ ){
                 var element = nodelist[ i ];
                 $( this ).each(
                     function() {
@@ -177,6 +181,50 @@ if( typeof $ == 'undefined' ){
             }
             return this;
         }
+
+        /**
+         * trigger
+         */
+         var T = function( event_name ){
+            if ("createEvent" in document) {
+                var evt = document.createEvent("HTMLEvents");
+                evt.initEvent( event_name, false, true);
+                for( var i = 0; i < this.length; i++ ){
+                    this[i].dispatchEvent(evt);
+                }
+            } else {
+                for( var i = 0; i < this.length; i++ ){
+                    this[ i ].fireEvent(event_name);
+                }
+            }
+        }
+
+        /**
+         * position
+         */
+        P = function(){
+            // Returns the first element
+            if( this.length == 0 ){
+                return undefined;
+            }
+            var elem = this[0];
+            var box = elem.getBoundingClientRect();
+
+            var body = document.body;
+            var docEl = document.documentElement;
+
+            var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+            var clientTop = docEl.clientTop || body.clientTop || 0;
+            var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+            var top  = box.top +  scrollTop - clientTop;
+            var left = box.left + scrollLeft - clientLeft;
+
+            return { top: Math.round(top), left: Math.round(left) };
+        }
+
         /**
          * find
          */
@@ -265,7 +313,7 @@ if( typeof $ == 'undefined' ){
             }
 
             // Add methods
-            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R};
+            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,position:P};
             for ( var fi in f ) {
                 e[fi] = function( e, f ){
                    return function(){return f.apply( e, arguments )};
