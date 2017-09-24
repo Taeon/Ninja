@@ -71,6 +71,12 @@ $( '#some-element' ).insertBefore( '#another-element' );
 $( '#some-element' ).insertAfter( '#another-element' );
 ```
 
+- Find position in window (top, left)
+
+```javascript
+var pos = $( '#some-element' ).position();
+```
+
 - Remove
 
 ```javascript
@@ -119,13 +125,19 @@ $( '#some-element' ).on( 'click', function(){...} );
 $( '#some-element' ).off( 'click', function(){...} );
 ```
 
+- Trigger event
+
+```javascript
+$( '#some-element' ).trigger( 'click' );
+```
+
 - Proxy
 
 ```javascript
 var func = $.proxy( function(){...}, this );
 ```
 
-- Is array
+- Is array?
 
 ```javascript
 if( $.isArray( myArray ) ){...}
