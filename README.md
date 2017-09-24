@@ -143,6 +143,10 @@ var func = $.proxy( function(){...}, this );
 if( $.isArray( myArray ) ){...}
 ```
 
+## Compatibility
+
+Known to work with pretty much any recent browser (Chrome, Firefox, Safari, IE, Opera). Even IE9!
+
 ## Acknowledgements
 
 This library owes a massive debt to [You Might Not Need jQuery](http://youmightnotneedjquery.com/), so hats off to them. Also, inevitably, to an uncountable number of contributors to various threads on [StackOverflow](https://stackoverflow.com). You're all amazing.
