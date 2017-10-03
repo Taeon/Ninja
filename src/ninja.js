@@ -200,9 +200,9 @@ if( typeof $ == 'undefined' ){
         }
 
         /**
-         * position
+         * offset (position relative to document)
          */
-        P = function(){
+        OS = function(){
             // Returns the first element
             if( this.length == 0 ){
                 return undefined;
@@ -313,7 +313,7 @@ if( typeof $ == 'undefined' ){
             }
 
             // Add methods
-            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,position:P};
+            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,offset:OS};
             for ( var fi in f ) {
                 e[fi] = function( e, f ){
                    return function(){return f.apply( e, arguments )};
