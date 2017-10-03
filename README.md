@@ -74,7 +74,7 @@ $( '#some-element' ).insertAfter( '#another-element' );
 - Find position in window (top, left)
 
 ```javascript
-var pos = $( '#some-element' ).position();
+var pos = $( '#some-element' ).offset();
 ```
 
 - Remove
