@@ -143,6 +143,24 @@ var func = $.proxy( function(){...}, this );
 if( $.isArray( myArray ) ){...}
 ```
 
+- AJAX
+
+Send an AJAX request. This is a HIGHLY simplified version of the equivalent jQuery function. 
+
+```javascript
+var func = $.ajax( url, options );
+```
+
+```javascript
+Currently the options (and their defaults) are as follows:
+{
+  method: 'get', // Request method e.g. get, post etc
+  data: null, // Any data to send with the (POST) request
+  success: function(){} // Callback on success. Arguments are JSON-decoded response text, status text, request object
+  error: function(){{ // Callback on failure. Arguments are request object, 'error', status text
+}
+```
+
 ## Compatibility
 
 Known to work with pretty much any recent browser (Chrome, Firefox, Safari, IE, Opera). Even IE9!
