@@ -22,6 +22,8 @@ Not only is that very laborious, it's also very inefficient if you're doing it a
 
 If you start using NINJA and then later discover that for some reason you need some function from jQuery that NINJA doesn't provide, that's not a problem. Because the syntax is the same, you can just swap out NINJA, add jQuery and off you go -- no code changes required.
 
+To further save bandwidth, you can just delete any methods you're not using. Watch our for dependencies though (e.g F() is used by a whole bunch of other methods).
+
 ## What NINJA is **not**
 
 So NINJA uses jQuery's syntax, but it provides only a very small subset of jQuery's functionality. It is not intended as a like-for-like replacement for jQuery, and it will never become that. If you're looking 'jQuery-but-smaller', try [Zepto](https://github.com/madrobby/zepto).
