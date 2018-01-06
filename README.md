@@ -4,7 +4,7 @@
 
 ## What NINJA is
 
-Ninja is intended to be a very small (as in, small file size -- <4KB minified, <1.5KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
+Ninja is intended to be a very small (as in, small file size -- <4KB minified, <1.75KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
 
 I created it because I wanted to create JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
@@ -151,8 +151,9 @@ Send an AJAX request. This is a HIGHLY simplified version of the equivalent jQue
 var func = $.ajax( url, options );
 ```
 
-```javascript
 Currently the options (and their defaults) are as follows:
+
+```javascript
 {
   method: 'get', // Request method e.g. get, post etc
   data: null, // Any data to send with the (POST) request
