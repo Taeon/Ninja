@@ -289,7 +289,7 @@ if( typeof $ == 'undefined' ){
                     }
                     case 'Function':{
                         // Call when page loads
-                        if (document.readyState != 'loading' && document.readyState != 'interactive'){
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
                             element();
                         } else {
                             document.addEventListener('DOMContentLoaded', element);
@@ -334,4 +334,47 @@ if( typeof $ == 'undefined' ){
     $.isArray = function( arr ){
         return Object.prototype.toString.call( arr ).match( /\[object (.*)\]/ )[1] == 'Array';
     }
+    $.ajax = function( url, opt ){
+        var o = {
+            method: 'get',
+            data: null,
+            success:function(){},
+            error:function(){}
+        };
+        for( var index in opt ){
+            o[ index ] = opt[ index ];
+        }
+
+        var request = new XMLHttpRequest();
+        request.open( o.method, url, true );
+        if( o.method.toLowerCase() == 'post' ){
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        }
+
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            o.success(
+                JSON.parse( request.response ),
+                request.statusText,
+                request
+            );
+          } else {
+            o.error(
+                request,
+                'error',
+                request.statusText
+            );
+          }
+        };
+
+        request.onerror = function(){
+            o.error(
+                request,
+                'error',
+                request.statusText
+            );
+        };
+
+        request.send(o.data);
+    };
 }
