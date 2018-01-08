@@ -4,9 +4,9 @@
 
 ## What NINJA is
 
-Ninja is intended to be a very small (as in, small file size -- <4.5KB minified, <1.75KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
+Ninja is intended to be a very small stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling. It's <4.5KB minified, <1.75KB GZipped (you do GZIP your pages, right?) -- small enough that you could embed it directly into the ```<HEAD>``` of your HTML without worrying about page bloat.
 
-I created it because I wanted to create JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
+I created it because I wanted to build JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
 ```javascript
 $( '.button' ).on( 'click', function(){...} );
@@ -20,19 +20,23 @@ document.querySelector( '.button' ).addEventListener( 'click', function(){...} )
 
 Not only is that very laborious, it's also very inefficient if you're doing it a lot. So I found myself creating a bunch of helper functions to save time...and then just thought "why not collect them together in one place and make them work like jQuery?".
 
-If you start using NINJA and then later discover that for some reason you need some function from jQuery that NINJA doesn't provide, that's not a problem. Because the syntax is the same, you can just swap out NINJA, add jQuery and off you go -- no code changes required.
-
-To further save bandwidth, you can just delete any methods you're not using. Watch our for dependencies though (e.g F() is used by a whole bunch of other methods).
-
 ## What NINJA is **not**
 
 So NINJA uses jQuery's syntax, but it provides only a very small subset of jQuery's functionality. It is not intended as a like-for-like replacement for jQuery, and it will never become that. If you're looking 'jQuery-but-smaller', try [Zepto](https://github.com/madrobby/zepto).
+
+## Making it even smaller
+
+To further save bandwidth, you can just delete any methods you're not using. Watch our for dependencies though (e.g F() is used by a whole bunch of other methods). Obviously you'll need to minify the custom version of the code yourself.
+
+## When NINJA isn't enough...
+
+If you start using NINJA and then later discover that for some reason you need some function from jQuery that NINJA doesn't provide, that's not a problem. Because the syntax is the same, you can just swap out NINJA, add jQuery and off you go -- no code changes required.
 
 ## Supported syntax and methods
 
 ### Selectors
 
-NINJA uses the same selector syntax as jQuery, so pretty much anything you can do with a jQuery selector, you can do with NINJA. More specifically, it's relies on Javascript's native ```querySelectorAll()``` function -- there are reportedly some inconsistencies between the two ([for example...](https://developer.rackspace.com/blog/using-querySelector-on-elements/)).
+NINJA uses (more or less) the same selector syntax as jQuery, so pretty much anything you can do with a jQuery selector, you can do with NINJA. More specifically, it's relies on Javascript's native ```querySelectorAll()``` function -- note that  there are reportedly some inconsistencies between the two ([for example...](https://developer.rackspace.com/blog/using-querySelector-on-elements/)).
 
 I've also heard it said that there are differences between browser implementations (which jQuery fixes). I haven't yet come across any, however.
 
