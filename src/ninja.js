@@ -347,8 +347,14 @@ if( typeof $ == 'undefined' ){
 
         var request = new XMLHttpRequest();
         request.open( o.method, url, true );
-        if( o.method.toLowerCase() == 'post' ){
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+        var data = null;
+        if( o.data !== null && o.method.toLowerCase() == 'post' ){
+            var data = new FormData();
+
+            for ( var key in o.data ) {
+                data.append(key, o.data[key]);
+            }
         }
 
         request.onload = function() {
@@ -375,6 +381,6 @@ if( typeof $ == 'undefined' ){
             );
         };
 
-        request.send(o.data);
+        request.send(data);
     };
 }
