@@ -4,7 +4,7 @@
 
 ## What NINJA is
 
-Ninja is intended to be a very small (as in, small file size -- <4KB minified, <1.5KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
+Ninja is intended to be a very small (as in, small file size -- <4.5KB minified, <1.75KB GZipped) stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling.
 
 I created it because I wanted to create JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
@@ -21,6 +21,8 @@ document.querySelector( '.button' ).addEventListener( 'click', function(){...} )
 Not only is that very laborious, it's also very inefficient if you're doing it a lot. So I found myself creating a bunch of helper functions to save time...and then just thought "why not collect them together in one place and make them work like jQuery?".
 
 If you start using NINJA and then later discover that for some reason you need some function from jQuery that NINJA doesn't provide, that's not a problem. Because the syntax is the same, you can just swap out NINJA, add jQuery and off you go -- no code changes required.
+
+To further save bandwidth, you can just delete any methods you're not using. Watch our for dependencies though (e.g F() is used by a whole bunch of other methods).
 
 ## What NINJA is **not**
 
@@ -141,6 +143,25 @@ var func = $.proxy( function(){...}, this );
 
 ```javascript
 if( $.isArray( myArray ) ){...}
+```
+
+- AJAX
+
+Send an AJAX request. This is a HIGHLY simplified version of the equivalent jQuery function. 
+
+```javascript
+var func = $.ajax( url, options );
+```
+
+Currently the options (and their defaults) are as follows:
+
+```javascript
+{
+  method: 'get', // Request method e.g. get, post etc
+  data: null, // Any data to send with the (POST) request
+  success: function(){} // Callback on success. Arguments are JSON-decoded response text, status text, request object
+  error: function(){{ // Callback on failure. Arguments are request object, 'error', status text
+}
 ```
 
 ## Compatibility
