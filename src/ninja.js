@@ -176,10 +176,13 @@ if( typeof $ == 'undefined' ){
                         }
                     }
                 } else {
-                    return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
+                    var matches = (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector);
+                    if( typeof matches != 'undefined' ){
+                        return matches.call(el, selector);
+                    }
                 }
             }
-            return this;
+            return false;
         }
 
         /**
