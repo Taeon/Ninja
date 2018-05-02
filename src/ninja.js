@@ -57,10 +57,18 @@ if( typeof $ == 'undefined' ){
         /**
         * on
         */
-        var O = function( event, func ){
-           for( var i = 0; i < this.length; i++ ){
-               this[ i ].addEventListener( event, func );
+        var _O = function( target, event, func ){
+           for( var i = 0; i < target.length; i++ ){
+               target[ i ].addEventListener( event, func );
            }
+        };
+        var O = function( event, func ){
+            var events = event.split( ' ' );
+            for( var i = 0; i < events.length; i++ ){
+                if( events[ i ].length > 0 ){
+                    _O( this, events[ i ], func );
+                }
+            }
            return this;
         };
         /**
@@ -79,31 +87,41 @@ if( typeof $ == 'undefined' ){
         var AC = function( className ){
             for( var i = 0; i < this.length; i++ ){
                 if (this[ i ].classList){
-                    this[ i ].classList.add(className);
+                    // Because Webkit browsers don't support adding multiple classes with spaces
+                    DOMTokenList.prototype.add.apply(this[ i ].classList, className.split( ' ' ));
                 } else {
                     this[ i ].className += ' ' + className;
                 }
             }
+            return this;
         };
         /**
         * removeClass
         */
         var RC = function( classes ){
-            if ( classes.indexOf( ' ' ) != -1 ) {
-                classes = classes.split(' ');
+
+            if (this.classList){
+                for( var i = 0; i < this.length; i++ ){
+                    // Because Webkit browsers don't support removing multiple classes with spaces
+                    DOMTokenList.prototype.remove.apply(this[ i ].classList, classes.split( ' ' ));
+                }
             } else {
-                classes = [classes];
+                if ( classes.indexOf( ' ' ) != -1 ) {
+                    classes = classes.split(' ');
+                } else {
+                    classes = [classes];
+                }
+                for ( var i = 0; i < classes.length; i++ ) {
+                    var className = classes[i];
+                    this.each(
+                        function(){
+                            this.className = this.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+                        }
+                    );
+                }
             }
-            for ( var i = 0; i < classes.length; i++ ) {
-                var className = classes[i];
-                this.each(function(){
-                    if (this.classList)
-                        this.classList.remove(className);
-                    else
-                        this.className = this.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-                    }
-                );
-            }
+
+            return this;
         };
 
         /**
@@ -229,11 +247,36 @@ if( typeof $ == 'undefined' ){
         }
 
         /**
+         * Data
+         */
+         D = function( name, value ){
+             if( typeof value !== 'undefined' ){
+                 for( var i = 0; i < this.length; i++ ){
+                     if( typeof value == 'object' ){
+                         this[ i ][ '__object_data-' + name ] = value;
+                         value = '__object_data-' + name;
+                     }
+                     this[ i ].setAttribute( 'data-' + name, value );
+                 }
+             } else if( name !== 'undefined' ){
+                 var value = this[ 0 ].getAttribute( 'data-' + name );
+                 if( value !== null ){
+                     if( value.indexOf( '__object_data-' ) === 0 ){
+                         return this[ 0 ][ value ];
+                     }
+                     return value;
+                 }
+                 return undefined;
+             }
+             return undefined;
+         }
+
+        /**
          * find
          */
         var F = function( element, parent_element ){
             var e;
-            if( element instanceof HTMLElement || element instanceof Window ){
+            if( element instanceof HTMLElement || element instanceof Window || element instanceof DocumentFragment ){
                 e = [element];
             } else {
                 switch ( Object.prototype.toString.call(element).match( /\[object (.*)\]/ )[1] ) {
@@ -316,7 +359,7 @@ if( typeof $ == 'undefined' ){
             }
 
             // Add methods
-            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,offset:OS};
+            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,offset:OS,data:D};
             for ( var fi in f ) {
                 e[fi] = function( e, f ){
                    return function(){return f.apply( e, arguments )};
@@ -350,6 +393,7 @@ if( typeof $ == 'undefined' ){
 
         var request = new XMLHttpRequest();
         request.open( o.method, url, true );
+        request.setRequestHeader('Accept', 'application/json');
 
         var data = null;
         if( o.data !== null && o.method.toLowerCase() == 'post' ){
@@ -358,6 +402,14 @@ if( typeof $ == 'undefined' ){
             for ( var key in o.data ) {
                 data.append(key, o.data[key]);
             }
+        }
+        if( o.data !== null && o.method.toLowerCase() == 'delete' ){
+            var str = [];
+             for (var p in o.data)
+               if (o.data.hasOwnProperty(p)) {
+                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(o.data[p]));
+               }
+             var data = str.join("&");
         }
 
         request.onload = function() {
@@ -369,7 +421,7 @@ if( typeof $ == 'undefined' ){
             );
           } else {
             o.error(
-                request,
+                JSON.parse( request.response ),
                 'error',
                 request.statusText
             );
@@ -378,7 +430,7 @@ if( typeof $ == 'undefined' ){
 
         request.onerror = function(){
             o.error(
-                request,
+                JSON.parse( request.response ),
                 'error',
                 request.statusText
             );
