@@ -137,6 +137,25 @@ $( '#some-element' ).off( 'click', function(){...} );
 $( '#some-element' ).trigger( 'click' );
 ```
 
+- Get index -- i.e. its numerical index as a child of its parent
+
+```javascript
+var index = $( '#some-element' ).index();
+```
+
+- Get/set an element's data
+
+```javascript
+// Set (also works for multiple elements)
+$( '#some-element' ).data( 'foo', 'bar' );
+// Get a single value
+var foo = $( '#some-element' ).data( 'foo' ); // 'bar'
+// Get all values (as an object)
+// Note that for maximum compatiblity, hyphenated values are returned in their original form and as camel-case
+// ...so for example, 'data-my-data-attribute' would be returned as 'my-data-attribute' and 'myDataAttribute'
+var data = $( '#some-element' ).data(); // {foo:'bar'}
+```
+
 - Proxy
 
 ```javascript
