@@ -223,7 +223,7 @@ if( typeof $ == 'undefined' ){
         /**
          * offset (position relative to document)
          */
-        OS = function(){
+        var OS = function(){
             // Returns the first element
             if( this.length == 0 ){
                 return undefined;
@@ -249,7 +249,6 @@ if( typeof $ == 'undefined' ){
         /**
          * Data
          */
-         D = function( name, value ){
              if( typeof value !== 'undefined' ){
                  for( var i = 0; i < this.length; i++ ){
                      if( typeof value == 'object' ){
@@ -258,7 +257,6 @@ if( typeof $ == 'undefined' ){
                      }
                      this[ i ].setAttribute( 'data-' + name, value );
                  }
-             } else if( name !== 'undefined' ){
                  var value = this[ 0 ].getAttribute( 'data-' + name );
                  if( value !== null ){
                      if( value.indexOf( '__object_data-' ) === 0 ){
@@ -267,8 +265,26 @@ if( typeof $ == 'undefined' ){
                      return value;
                  }
                  return undefined;
+             } else {
+                 for( var i = 0; i < this[ 0 ].attributes.length; i++ ){
+                     if( this[ 0 ].attributes[ i ].name.substr( 0, 5 ) == 'data-' ){
+                         var name = this[ 0 ].attributes[ i ].name.substr( 5 );
+                         var value = this[ 0 ].attributes[ i ].value;
+                         data[ name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }) ] = value; // For jQuery 3 compatiblity (DataSet API https://api.jquery.com/data/)
+                     }
+                 }
+                 return data;
              }
              return undefined;
+         }
+
+         /**
+          * Index
+         var I = function(){
+             var i = 1;
+             var current = this[0];
+             while( (current = current.previousSibling) != null ) i++;
+             return i - 1;
          }
 
         /**
@@ -359,7 +375,7 @@ if( typeof $ == 'undefined' ){
             }
 
             // Add methods
-            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,offset:OS,data:D};
+            var f = {append:A,prepend:P,insertAfter:IA,insertBefore:IB,on:O,off:OF,addClass:AC,hasClass:HC,removeClass:RC,each:E,closest:FC,remove:R,trigger:T,offset:OS,data:D,index:I};
             for ( var fi in f ) {
                 e[fi] = function( e, f ){
                    return function(){return f.apply( e, arguments )};
