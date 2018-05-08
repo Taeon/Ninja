@@ -4,7 +4,7 @@
 
 ## What NINJA is
 
-Ninja is intended to be a very small stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling. It's <4.5KB minified, <1.75KB GZipped (you do GZIP your pages, right?) -- small enough that you could embed it directly into the ```<HEAD>``` of your HTML without worrying about page bloat.
+Ninja is intended to be a very small stand-in for jQuery, when all you need is some of what it can do -- like DOM manipulation or event handling. It's <5.1KB minified, <2.2KB GZipped (you do GZIP your pages, right?) -- small enough that you could embed it directly into the ```<HEAD>``` of your HTML without worrying about page bloat.
 
 I created it because I wanted to build JavaScript libraries that didn't require jQuery, but I often found myself frustrated at having to use JavaScript's verbose syntax. So I wanted to write
 
@@ -151,7 +151,7 @@ if( $.isArray( myArray ) ){...}
 
 - AJAX
 
-Send an AJAX request. This is a HIGHLY simplified version of the equivalent jQuery function. 
+Send an AJAX request. This is a HIGHLY simplified version of the equivalent jQuery function.
 
 ```javascript
 var func = $.ajax( url, options );
