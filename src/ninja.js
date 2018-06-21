@@ -286,10 +286,10 @@ if( typeof $ == 'undefined' ){
           * Index
           */
          var I = function(){
-             var i = 1;
+             var i = 0;
              var current = this[0];
              while( (current = current.previousElementSibling) != null ) i++;
-             return i - 1;
+             return i;
          }
 
         /**
