@@ -288,7 +288,7 @@ if( typeof $ == 'undefined' ){
          var I = function(){
              var i = 1;
              var current = this[0];
-             while( (current = current.previousSibling) != null ) i++;
+             while( (current = current.previousElementSibling) != null ) i++;
              return i - 1;
          }
 
