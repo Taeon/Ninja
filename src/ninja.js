@@ -302,6 +302,7 @@ if( typeof $ == 'undefined' ){
             } else {
                 switch ( Object.prototype.toString.call(element).match( /\[object (.*)\]/ )[1] ) {
                     case 'String':{
+                        element = element.trim();
                         if ( element.charAt( 0 ) == '<' ) {
                             var dummy = document.createElement( 'DIV' );
                             dummy.innerHTML = element;
