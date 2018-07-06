@@ -100,7 +100,10 @@ if( typeof $ == 'undefined' ){
         */
         var RC = function( classes ){
 
-            if (this.classList){
+            if( this.length == 0 ){
+                return;
+            }
+            if (this[ 0 ].classList){
                 for( var i = 0; i < this.length; i++ ){
                     // Because Webkit browsers don't support removing multiple classes with spaces
                     DOMTokenList.prototype.remove.apply(this[ i ].classList, classes.split( ' ' ));
