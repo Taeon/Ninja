@@ -416,26 +416,34 @@ if( typeof $ == 'undefined' ){
             o[ index ] = opt[ index ];
         }
 
+        var data = null;
+        if( o.data !== null ){
+            if( o.method.toLowerCase() == 'post' ){
+                var data = new FormData();
+
+                for ( var key in o.data ) {
+                    data.append(key, o.data[key]);
+                }
+            } else {
+                var str = [];
+                 for (var p in o.data)
+                   if (o.data.hasOwnProperty(p)) {
+                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(o.data[p]));
+                   }
+                 var data = str.join("&");
+                 if( o.method.toLowerCase() == 'get' ){
+                     if( url.indexOf( '?' ) == -1 ){
+                         url += '?' + data;
+                     } else {
+                         url += '&' + data;
+                     }
+                     data = null;
+                 }
+            }
+        }
         var request = new XMLHttpRequest();
         request.open( o.method, url, true );
         request.setRequestHeader('Accept', 'application/json');
-
-        var data = null;
-        if( o.data !== null && o.method.toLowerCase() == 'post' ){
-            var data = new FormData();
-
-            for ( var key in o.data ) {
-                data.append(key, o.data[key]);
-            }
-        }
-        if( o.data !== null && o.method.toLowerCase() == 'delete' ){
-            var str = [];
-             for (var p in o.data)
-               if (o.data.hasOwnProperty(p)) {
-                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(o.data[p]));
-               }
-             var data = str.join("&");
-        }
 
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
