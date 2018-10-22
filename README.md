@@ -191,7 +191,7 @@ Currently the options (and their defaults) are as follows:
 
 Known to work with pretty much any recent browser (Chrome, Firefox, Safari, IE, Opera). Even IE9!
 
-## A not on performance
+## A note on performance
 
 NINJA was not written with performance in mind, and is likely to be significantly slower in heavy-use situations than jQuery, or vanilla JS. If you're planning to use it for resource-intensive applications, you might want to think again.
 
