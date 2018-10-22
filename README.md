@@ -191,6 +191,10 @@ Currently the options (and their defaults) are as follows:
 
 Known to work with pretty much any recent browser (Chrome, Firefox, Safari, IE, Opera). Even IE9!
 
+## A not on performance
+
+NINJA was not written with performance in mind, and is likely to be significantly slower in heavy-use situations than jQuery, or vanilla JS. If you're planning to use it for resource-intensive applications, you might want to think again.
+
 ## Acknowledgements
 
 This library owes a massive debt to [You Might Not Need jQuery](http://youmightnotneedjquery.com/), so hats off to them. Also, inevitably, to an uncountable number of contributors to various threads on [StackOverflow](https://stackoverflow.com). You're all amazing.
