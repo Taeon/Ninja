@@ -134,7 +134,7 @@ $( '#some-element' ).off( 'click', function(){...} );
 - Trigger event
 
 ```javascript
-$( '#some-element' ).trigger( 'click' );
+$( '#some-element' ).trigger( 'click', some_optional_data );
 ```
 
 - Get index -- i.e. its numerical index as a child of its parent
