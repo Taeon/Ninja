@@ -209,17 +209,16 @@ if( typeof $ == 'undefined' ){
         /**
          * trigger
          */
-         var T = function( event_name ){
-            if ("createEvent" in document) {
-                var evt = document.createEvent("HTMLEvents");
-                evt.initEvent( event_name, false, true);
-                for( var i = 0; i < this.length; i++ ){
-                    this[i].dispatchEvent(evt);
-                }
+         var T = function( event_name, data ){
+            if (window.CustomEvent && typeof window.CustomEvent === 'function') {
+                var event = new CustomEvent( event_name, {detail: data});
             } else {
-                for( var i = 0; i < this.length; i++ ){
-                    this[ i ].fireEvent(event_name);
-                }
+                var event = document.createEvent('CustomEvent');
+                event.initCustomEvent(event_name, true, true, data);
+            }
+
+            for( var i = 0; i < this.length; i++ ){
+                this[i].dispatchEvent(event);
             }
         }
 
